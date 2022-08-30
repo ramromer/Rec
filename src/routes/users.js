@@ -31,13 +31,13 @@ const validateUserLogin = [
 ]
 
 const validateUserRegister = [
-  body('user').notEmpty().withMessage('Por favor ingrese un nombre de usuario'),
-  body('user').custom((value, {req}) => {
+  body('name').notEmpty().withMessage('Por favor ingrese un nombre de usuario'),
+  body('name').custom((value, {req}) => {
     return new Promise((resolve, reject) => {
       db.User.findOne({where:{name:req.body.name}}).then(function(user){
         
         if(Boolean(user)) {
-          reject(new Error('El usuario ya estgá siendo usado por otra persona'))
+          reject(new Error('El usuario ya estgá siendo usado por otra persona, por favor elegí uno distinto.'))
         }
         resolve(true)
       }).catch(err => {console.log(err); reject(new Error('Error en el servidor'))});

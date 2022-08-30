@@ -17,6 +17,9 @@ a {
 .is-invalid {
   background-color: #842029;
 }
+.validationAlert{
+  display: none;
+}
 
 ul {
   text-align: justify; 

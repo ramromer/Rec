@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up </title>
+    <link rel='stylesheet' href='/css/style.css' />
+
+</head>
+
+
+<body>
+    <main id="mainRegister">
+        <form id="form-register" action="/users/register" method="POST">
+            <fieldset>
+                <label for="name">Elegí tu nombre de usuario: </label>
+                <input name="name" type="text" id="name" value="<%= locals.oldData? oldData.name : null %>"
+                    placeholder="Nombre de usuario" />
+
+                <div class="validationAlert" id="nameAlert">
+                    Tu nombre debe tener al menos 5 caracteres
+                </div>
+                <% if (locals.errores && errores.name) { %>
+                    <p>
+                        <%=errores.name.msg %>
+                    </p>
+                    <%}%>
+                    <br>
+                    <br>
+                    <label for="email">Ingresá tu correo: </label>
+                        <input name="email" type="email" id="email" value="<%= locals.oldData? oldData.email : null %>"
+                            placeholder="E-mail" />
+                        <br class="validationAlert">
+                        <p class="validationAlert" id="yaexisteemail">Ya existe otro usuario con ese email. Por favor
+                            registrese con
+                            uno distinto, o ingrese <a href="/users/login">aqui</a>.</p>
+                        <div>
+                            <div class="validationAlert" id="emailAlert">
+                                Por favor ingresa un email
+                            </div>
+                            <div class="validationAlert" id="emailValidAlert">
+                                Por favor ingresa un email valido
+                            </div>
+                            <div id="usedEmail" class="validationAlert">
+                                Ese email ya está registrado.
+                                <a href="/users/login">Querés loguearte? </a>
+                            </div>
+                        </div>
+                        <% if (locals.errores && errores.email) { %>
+                            <p>
+                                <%=errores.email.msg %>
+                            </p>
+                            <%}%>
+                            <br>
+                            <label for="password">Elegí tu contraseña: </label>
+                                <input name="password" type="password" id="password" placeholder="Contraseña" />
+                                    <div class="validationAlert" id="passAlert">
+                                        Deben ser al menos 8 caracteres!
+                                    </div>
+                                <% if (locals.errores && errores.password) { %>
+                                    <p>
+                                        <%=errores.password.msg %>
+                                    </p>
+                                    <%}%>
+            </fieldset>
+            <fieldset>En caso de olvidar tu contraseña...
+                <input name="remember" type="text" id="remember" value="<%= locals.oldData? oldData.remember : null %>"
+                    placeholder="Ingresá alguna palabra o frase que te haga acordar tu password" />
+                <div>
+                    <div class="validationAlert" id="rememberAlert">
+                        No puede ser igual a la contraseña!
+                    </div>
+                    <% if (locals.errores && errores.user) { %>
+                        <p>
+                            <%=errores.user.msg %>
+                        </p>
+                        <%}%>
+                </div>
+            </fieldset>
+            <div>
+                <label>Tipo de usuario:</label> <br>
+                <div>
+                    <label for=""> Administrador </label><input type="radio" name="userType" value="1">
+                    <label for=""> Usuario </label><input type="radio" name="userType" checked="true" value="0">
+                </div>
+
+                <div class="button-register">
+                    <a href="/">
+                        <input type="button" class="btnDanger" value="Cancelar">
+                    </a>
+                    <input class="btnSuccess" id="submitBtn" type="submit" value="Enviar">
+                </div>
+        </form>
+    </main>
+    <script src="/js/register.js"></script>
+
+</body>
+
+</html>

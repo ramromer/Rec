@@ -4,13 +4,13 @@ const db = require("../database/models");
 
 let usersController = {
   register: (req, res) => {
-    res.render("./users/register.ejs");
+    res.render("./register.ejs");
   },
   registerWrite: (req, res) => {
     let errores = validationResult(req);
 
     if (errores.errors.length > 0) {
-      res.render("./users/register.ejs", {
+      res.render("./register.ejs", {
         errores: errores.mapped(),
         oldData: req.body,
       });
@@ -20,7 +20,7 @@ let usersController = {
         name: req.body.name,
         email: req.body.email,
         password: key,
-        remember: req.body.remember,
+        remember_token: req.body.remember,
         rol: req.body.userType,
       };
 
