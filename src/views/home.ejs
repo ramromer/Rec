@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todas las pelis</title>
+    <link rel='stylesheet' href='/css/style.css' />
+
+</head>
+
+<body>
+    <h1 id="titulo"></h1>
+    
+    <ul>
+        <% for( let i = 0; i < movies.length; i++ ) { %>
+        <li>
+            <a  href="/detail/<%= movies[i].id %>"><%= movies[i].title %></a>
+        </li>
+        <% } %>
+
+    </ul>
+
+    <br>
+    <p>
+        <a href="/add">Agregar otra peli</a>
+
+    </p>
+    <br>
+    <script src="/js/list.js"></script>    
+</body>
+</html>
