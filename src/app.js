@@ -1,18 +1,27 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+let createError = require('http-errors');
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
+let session = require("express-session");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+let indexRouter = require('./routes/index');
+let usersRouter = require('./routes/users');
 
-var app = express();
-var methodOverride = require('method-override');
+let app = express();
+let methodOverride = require('method-override');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use(
+  session({
+    secret: "234t234bse23rbIUNN@#^421mb_6276gb",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 app.use(logger('dev'));
 app.use(express.json());
