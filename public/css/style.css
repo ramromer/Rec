@@ -10,7 +10,14 @@ a {
   
 }
 
+.is-valid {
+  background-color: #198754;
+}
+
+.is-invalid {
+  background-color: #842029;
+}
+
 ul {
-  text-align: justify;
-  
+  text-align: justify; 
 }

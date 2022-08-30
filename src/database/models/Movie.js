@@ -28,9 +28,10 @@ module.exports = (sequelize, dataTypes) => {
     };
     let config = {
         timestamps: true,
+        paranoid: true,
         createdAt: 'created_at',
         updatedAt: 'updated_at',
-        deletedAt: false
+        deletedAt: 'deleted_at',
     }
     const Movie = sequelize.define(alias,cols,config);
 
@@ -51,3 +52,7 @@ module.exports = (sequelize, dataTypes) => {
 
     return Movie
 };
+
+
+//ALTER TABLE `movies_db`.`movies` 
+//ADD COLUMN `deleted_at` TIMESTAMP NULL DEFAULT NULL AFTER `genre_id`;

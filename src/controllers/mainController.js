@@ -68,7 +68,7 @@ const mainController = {
             Movie.release_date = moment(Movie.release_date).locale('es-us').format('YYYY-MM-DD');
             //new Date("Sun Jan 03 1999 21:00:00 GMT-0300 (hora estándar de Argentina)").toLocaleDateString()
             //return res.send(Movie.release_date);
-            return res.render(path.resolve(__dirname, '..', 'views',  'moviesEdit'), {Movie,allGenres,allActors})})
+            return res.render(path.resolve(__dirname, '..', 'views',  'edit'), {Movie,allGenres,allActors})})
         .catch(error => res.send(error))
     },
     update: function (req,res) {
@@ -87,7 +87,7 @@ const mainController = {
                 where: {id: movieId}
             })
         .then(()=> {
-            return res.redirect('/movies')})            
+            return res.redirect('/')})            
         .catch(error => res.send(error))
     },
     delete: function (req,res) {
