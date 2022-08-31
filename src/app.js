@@ -3,6 +3,7 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
+let logged = require("./middleware/logged");
 let session = require("express-session");
 
 let indexRouter = require('./routes/index');
@@ -22,12 +23,12 @@ app.use(
     saveUninitialized: true,
   })
 );
-
+app.use(express.static(path.join(__dirname, '../public')));
+app.use(cookieParser());
+app.use(logged);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../public')));
 app.use(methodOverride('_method'));
 
 app.use('/', indexRouter);

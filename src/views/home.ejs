@@ -22,11 +22,21 @@
     </ul>
 
     <br>
+    <% if(locals.userRol==1){ %>
     <p>
-        <a href="/add">Agregar otra peli</a>
-
+        <a class="logged" href="/add">Agregar otra peli</a>
     </p>
+    <%} %>
     <br>
+    <Fieldset>
+        <% if(!locals.isLogged){ %>
+        <a class="notLogged" href="/users/register">Registrarme</a>
+        <a class="notLogged" href="/users/login">Ingresar</a>
+        <%} %>
+        <% if(locals.isLogged){ %>
+        <a class="logged" href="/users/logout">Salir</a>
+        <%} %>
+    </Fieldset>
     <script src="/js/list.js"></script>    
 </body>
 </html>

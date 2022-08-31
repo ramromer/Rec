@@ -11,14 +11,15 @@
 const express = require('express');
 const router = express.Router();
 const mainController = require('../controllers/mainController');
+const admin = require('../middleware/admin');
 
 router.get('/', mainController.list);
 router.get('/detail/:id', mainController.detail);
-router.get('/add', mainController.add);
-router.post('/create', mainController.create);
-router.get('/edit/:id', mainController.edit);
-router.put('/update/:id', mainController.update);
-router.get('/delete/:id', mainController.delete);
-router.delete('/delete/:id', mainController.destroy);
+router.get('/add', admin, mainController.add);
+router.post('/create', admin, mainController.create);
+router.get('/edit/:id', admin, mainController.edit);
+router.put('/update/:id', admin, mainController.update);
+router.get('/delete/:id', admin, mainController.delete);
+router.delete('/delete/:id', admin, mainController.destroy);
 
 module.exports = router;

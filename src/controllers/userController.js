@@ -32,7 +32,8 @@ let usersController = {
     }
   },
   login: (req, res) => {
-    return res.render("./users/login.ejs");
+  
+    return res.render("./login.ejs");
   },
   loginProcess: (req, res) => {
     db.User.findOne({
@@ -45,13 +46,14 @@ let usersController = {
         if (isOkThePassword) {
           delete user.password;
           req.session.userLogged = user;
-
+          
+          
           if (req.body.recordarLogin == true) {
             res.cookie("user", req.body.email, { maxAge: 1000 * 60 * 60 }); 
           }
-          res.redirect("/");
+          res.redirect("/users/profile");
         } else {
-          return res.render("./users/login.ejs", {
+          return res.render("./login.ejs", {
             errors: {
               email: {
                 msg: "Las credenciales son inválidas",
@@ -61,16 +63,13 @@ let usersController = {
         }
       } else {
         res
-          .render("./users/login.ejs", {
+          .render("./login.ejs", {
             errors: {
               email: {
                 msg: "La combinación de usuario y contraseña son invalidos o inexistente",
               },
             },
           })
-          .catch((err) =>
-            console.log(" error al consultar la base de datos", err)
-          );
       }
     });
   },
@@ -81,16 +80,16 @@ let usersController = {
       },
     })
       .then((user) => {
-        return res.render("./users/profile", { user: user.dataValues });
+        return res.render("./profile", { user: user.dataValues });
       })
       .catch((err) => console.log(" error al consultar la base de datos", err));
   },
   edit: function (req, res) {
     db.User.findByPk(req.params.id).then(function (Us) {
       if (Us != undefined) {
-        res.render("./users/userEdit.ejs", { Us: Us });
+        res.render("./userEdit.ejs", { Us: Us });
       } else {
-        res.redirect("./users/register.ejs");
+        res.redirect("./register.ejs");
       }
     });
   },
@@ -99,9 +98,7 @@ let usersController = {
     if (req.body.password ) {
       queryUserUpdate.password = bcryptjs.hashSync(req.body.password, 5);
     }
-    //console.log(queryUserUpdate, "  ", queryUserUpdate.length )
     if (Object.keys(queryUserUpdate).length > 0) {
-    //console.log("queryUserUpdate")
 
       db.User.update(queryUserUpdate, {
         where: {
