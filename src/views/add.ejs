@@ -23,7 +23,7 @@
                 <%}%>
                 <div class="validationAlert" id="titleAlert">El titulo es obligatorio y debe contener al menos 5 caracteres.</div>
                 <label for="rating">Calificación </label>
-                <div><input type="number" name="rating" value="<%=locals.old && old.rating%>" id="rating" placeholder="Indicar valor entre 0 y 10"> </div>
+                <div><input type="number" step=".1" name="rating" value="<%=locals.old && old.rating%>" id="rating" placeholder="Indicar valor entre 0.0 y 10"> </div>
                 <% if(locals.errors && errors.rating) { %>
                     <p><%=errors.rating.msg%></p>
                 <%}%>

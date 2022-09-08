@@ -12,12 +12,14 @@
     <h1 class="titulo">Editando:</h1>
     <h1 class="titulo">  <%= Movie.title %></h1>
     <section class="formulario">
-        
+        <% if(locals.errors) { %>
+            <p><%=locals.errors[0]%></p>
+        <%}%>
             <form action="/update/<%= Movie.id %>?_method=PUT" method="POST">
                 <label for="title">Título </label>
                 <p><input type="text" name="title" id="" value="<%= Movie.title %>" required></p>
                 <label for="rating">Calificación </label>
-                <p><input type="number" name="rating" id="" value="<%= Movie.rating %>" required></p>
+                <p><input type="number" name="rating" id="" value="<%= Movie.rating%>" required></p>
                 <label for="awards">Premios </label>
                 <p><input type="number" name="awards" id="" value="<%= Movie.awards %>" required></p>
                 <label for="release_date">Fecha de creación </label>

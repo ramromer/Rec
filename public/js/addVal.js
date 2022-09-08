@@ -29,12 +29,12 @@ form.addEventListener('submit', (event) => {
         errors.push('el titulo no puede estar vacio');
         event.preventDefault(); //comentar para provar las validaciones del backend
     }
-    if(form.rating.value !== ""){
-        if(form.rating.value > 0 && form.rating.value <= 10){
+    if(form.rating.value !== undefined){
+        if(form.rating.value > 0.0 && form.rating.value <= 10){
             form.rating.classList.add('is-valid');
             form.rating.classList.remove('is-invalid');
-        }else if (form.rating.value < 0 || form.rating.value > 10){
-            event.preventDefault(); //comentar para provar las validaciones del backend
+        }else if (form.rating.value < 0.0 || form.rating.value > 10){
+            // event.preventDefault(); //comentar para provar las validaciones del backend
             form.rating.classList.add('is-invalid');
         form.rating.classList.remove('is-valid');
             errors.push('Rating No puede ser menor a 0 ni mayor a 10');
@@ -43,7 +43,7 @@ form.addEventListener('submit', (event) => {
         form.rating.classList.add('is-invalid');
         form.rating.classList.remove('is-valid');
         errors.push('Debe indicar el rating');
-        event.preventDefault(); //comentar para provar las validaciones del backend
+        // event.preventDefault(); //comentar para provar las validaciones del backend
     }
     if(form.awards.value !== ""){
         if(form.awards.value > 0 && form.awards.value <= 10){

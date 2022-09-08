@@ -44,7 +44,7 @@ const mainController = {
     create: function (req,res) {
         let errors = validationResult(req);
         if (errors.isEmpty())
-        {console.log('esetamoaca');
+        {
             Movies.create(
             {
                 title: req.body.title,
@@ -56,7 +56,7 @@ const mainController = {
             }
         ).then(()=> {return res.redirect('/')})            
         .catch(err => res.send(err))}
-        else{console.log('wooohoo');
+        else{
             let promGenres = Genres.findAll();
             let promActors = Actors.findAll();
             Promise
@@ -84,7 +84,11 @@ const mainController = {
     },
     update: function (req,res) {
         let movieId = req.params.id;
-        Movies
+        let errors = validationResult(req);
+        console.log('herrorsere')
+        console.log(errors)
+        if (errors.isEmpty())
+        {Movies
         .update(
             {
                 title: req.body.title,
@@ -100,6 +104,23 @@ const mainController = {
         .then(()=> {
             return res.redirect('/')})            
         .catch(error => res.send(error))
+        console.log('here')}
+            else
+        {console.log('There')
+            let movieId = req.params.id;
+            let promMovies = Movies.findByPk(movieId,{include: ['genre','actors']});
+            let promGenres = Genres.findAll();
+            let promActors = Actors.findAll();
+            Promise
+            .all([promMovies, promGenres, promActors])
+            .then(([Movie, allGenres, allActors]) => {
+                //Movie.release_date = moment( new Date(Movie.release_date)).toLocaleDateString();
+                Movie.release_date = moment(Movie.release_date).locale('es-us').format('YYYY-MM-DD');
+                //new Date("Sun Jan 03 1999 21:00:00 GMT-0300 (hora estándar de Argentina)").toLocaleDateString()
+                //return res.send(Movie.release_date);
+                return res.render(path.resolve(__dirname, '..', 'views',  'edit'), {Movie,allGenres,allActors,errors:errors.mapped(),old:req.body})})
+            .catch(error => res.send(error))
+        }
     },
     delete: function (req,res) {
         let movieId = req.params.id;
