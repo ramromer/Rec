@@ -23,16 +23,28 @@
                 <%}%>
                 <div class="validationAlert" id="titleAlert">El titulo es obligatorio y debe contener al menos 5 caracteres.</div>
                 <label for="rating">Calificación </label>
-                <div><input type="number" name="rating" value="0" id="rating" placeholder="Indicar valor entre 0 y 10"> </div>
+                <div><input type="number" name="rating" value="<%=locals.old && old.rating%>" id="rating" placeholder="Indicar valor entre 0 y 10"> </div>
+                <% if(locals.errors && errors.rating) { %>
+                    <p><%=errors.rating.msg%></p>
+                <%}%>
                 <div class="validationAlert" id="ratingAlert">El rating es obligatorio y debe ser un numero entre 0 y 10.</div>
                 <label for="awards">Premios </label>
-                <div><input type="number" name="awards" value="0"  id="awards" placeholder="Indicar valor entre 0 y 10"></div>
+                <div><input type="number" name="awards" value="<%=locals.old && old.awards%>"  id="awards" placeholder="Indicar valor entre 0 y 10"></div>
+                <% if(locals.errors && errors.awards) { %>
+                    <p><%=errors.awards.msg%></p>
+                <%}%>
                 <div class="validationAlert" id="awardsAlert">La cantidad de premios es obligatoria y debe ser un numero entre 0 y 10.</div>
                 <label for="release_date">Fecha de creación </label>
                 <div><input type="date" name="release_date" id="release_date" placeholder="08/09/2022"></div>
+                <% if(locals.errors && errors.release_date) { %>
+                    <p><%=errors.release_date.msg%></p>
+                <%}%>
                 <div class="validationAlert" id="dateAlert">La fecha de lanzamiento es obligatoria y debe ser válida (dd-mm-yyyy).</div>
                 <label for="length">Duración </label>
-                <div><input type="number" name="length" value="0" id="length" placeholder="Indicar duración entre 60 y 360 minutos" ></div>
+                <div><input type="number" name="length" value="<%=locals.old && old.length%>" id="length" placeholder="Indicar duración entre 60 y 360 minutos" ></div>
+                <% if(locals.errors && errors.length) { %>
+                    <p><%=errors.length.msg%></p>
+                <%}%>
                 <div class="validationAlert" id="lengthAlert">La duración es obligatoria y debe ser un numero entre 60 y 360.</div>
                 <label for="genre_id">Género </label>
                 <div>
@@ -49,7 +61,7 @@
                     <ul name="actors">
                         <% for( let i = 0; i < allActors.length; i++ ) { %>
                         <li>
-                            <input type="checkbox"><%= allActors[i].first_name%> <%= allActors[i].last_name%></input>
+                            <input name="<%= allActors[i].id%>" type="checkbox"><%= allActors[i].first_name%> <%= allActors[i].last_name%></input>
                         </li>
                         <% } %>
                     </ul>
