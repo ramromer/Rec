@@ -45,6 +45,9 @@ const mainController = {
         let errors = validationResult(req);
         if (errors.isEmpty())
         {
+            let actoresNuevos = [];
+            let actoresNuevosArray = []
+
             Movies.create(
             {
                 title: req.body.title,
