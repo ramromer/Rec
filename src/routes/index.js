@@ -13,7 +13,7 @@ const validateNewMovie = [
   check('awards').notEmpty().withMessage('Awards: debe ingresar un numero.'),
   check('awards').isInt({min:0,max:10}).withMessage('Awards: debe ser un numero entre 1 y 10.'),
   check('release_date').notEmpty().withMessage('Debes ingresar la fecha de lanzamiento.'),
-  
+  check('release_date').isDate().withMessage('Debes ingresar una fecha válida.'),
   check('length').notEmpty().withMessage('Debes ingresar la duración'),
   check('length').isInt({min:60,max:180}).withMessage('La duración debe ser entre 60 y 180 minutos.'),
 ]

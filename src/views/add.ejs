@@ -17,7 +17,10 @@
             <ul class="errores"></ul>
             <form class="form" action="/create" method="POST">
                 <label for="title">Titulo </label>
-                <div><input type="text" name="title" id="title" ></div>
+                <div><input type="text" name="title" id="title" value="<%=locals.old && old.title%>" ></div>
+                <% if(locals.errors && errors.title) { %>
+                    <p><%=errors.title.msg%></p>
+                <%}%>
                 <div class="validationAlert" id="titleAlert">El titulo es obligatorio y debe contener al menos 5 caracteres.</div>
                 <label for="rating">Calificación </label>
                 <div><input type="number" name="rating" value="0" id="rating" placeholder="Indicar valor entre 0 y 10"> </div>

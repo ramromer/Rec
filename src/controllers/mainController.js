@@ -62,7 +62,7 @@ const mainController = {
             Promise
             .all([promGenres, promActors])
             .then(([allGenres, allActors]) => {
-                return res.render(path.resolve(__dirname, '..', 'views',  'add'), {allGenres,allActors,errors})})
+                return res.render(path.resolve(__dirname, '..', 'views',  'add'), {allGenres,allActors,errors:errors.mapped(),old:req.body})})
             .catch(erro => res.send(erro))
         }
 
