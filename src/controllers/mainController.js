@@ -6,6 +6,7 @@ const db = require('../database/models');
 const sequelize = db.sequelize;
 const { Op } = require("sequelize");
 const moment = require('moment');
+const {validationResult} = require('express-validator')
 
 const Movies = db.Movie;
 const Genres = db.Genre;
@@ -41,8 +42,10 @@ const mainController = {
         .catch(error => res.send(error))
     },
     create: function (req,res) {
-        Movies
-        .create(
+        let errors = validationResult(req);
+        if (errors.isEmpty())
+        {console.log('esetamoaca');
+            Movies.create(
             {
                 title: req.body.title,
                 rating: req.body.rating,
@@ -51,10 +54,18 @@ const mainController = {
                 length: req.body.length,
                 genre_id: req.body.genre_id
             }
-        )
-        .then(()=> {
-            return res.redirect('/')})            
-        .catch(error => res.send(error))
+        ).then(()=> {return res.redirect('/')})            
+        .catch(err => res.send(err))}
+        else{console.log('wooohoo');
+            let promGenres = Genres.findAll();
+            let promActors = Actors.findAll();
+            Promise
+            .all([promGenres, promActors])
+            .then(([allGenres, allActors]) => {
+                return res.render(path.resolve(__dirname, '..', 'views',  'add'), {allGenres,allActors,errors})})
+            .catch(erro => res.send(erro))
+        }
+
     },
     edit: function(req,res) {
         let movieId = req.params.id;

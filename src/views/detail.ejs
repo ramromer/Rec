@@ -29,7 +29,7 @@
     </ul>
     <br>
     <section>
-        <% if(locals.isLogged){ %>
+        <% if(locals.userRol==1){ %>
             <a class="botonModificar" href="/edit/<%= movie.id %>">Modificar</a>
             <a class="botonBorrar" href="/delete/<%= movie.id %>">Borrar</a>
         <%} %>
