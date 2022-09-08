@@ -29,8 +29,10 @@
     </ul>
     <br>
     <section>
-        <a class="botonModificar" href="/edit/<%= movie.id %>">Modificar</a>
-        <a class="botonBorrar" href="/delete/<%= movie.id %>">Borrar</a>
+        <% if(locals.isLogged){ %>
+            <a class="botonModificar" href="/edit/<%= movie.id %>">Modificar</a>
+            <a class="botonBorrar" href="/delete/<%= movie.id %>">Borrar</a>
+        <%} %>
         <a class="botonVolver" href="/">Listado de Películas</a>
     </section>
 

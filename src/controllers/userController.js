@@ -80,6 +80,8 @@ let usersController = {
       },
     })
       .then((user) => {
+        delete(user.dataValues.password);
+        console.log(user);
         return res.render("./profile", { user: user.dataValues });
       })
       .catch((err) => console.log(" error al consultar la base de datos", err));
